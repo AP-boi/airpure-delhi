@@ -367,4 +367,176 @@
         </div>
     </footer>
 </body>
+    
+    <!-- JavaScript for Interactive Features -->
+        <script>
+                    // Smooth scrolling for navigation links
+                    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                                    anchor.addEventListener('click', function (e) {
+                                                        e.preventDefault();
+                                                        const target = document.querySelector(this.getAttribute('href'));
+                                                        if (target) {
+                                                                                target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                                                                            }
+                                                                        });
+                                });
+
+                    // Real-time Air Quality Index (AQI) Simulator
+                    class AQIMonitor {
+                                    constructor() {
+                                                        this.currentAQI = 0;
+                                                        this.initialize();
+                                                    }
+
+                                    initialize() {
+                                                        this.updateAQI();
+                                                        setInterval(() => this.updateAQI(), 5000); // Update every 5 seconds
+                                                    }
+
+                                    updateAQI() {
+                                                        // Simulate Delhi AQI (typically ranges from 200-500)
+                                                        this.currentAQI = Math.floor(Math.random() * (450 - 200) + 200);
+                                                        const category = this.getAQICategory(this.currentAQI);
+                                                        console.log(`Current Delhi AQI: ${this.currentAQI} - ${category}`);
+                                                    }
+
+                                    getAQICategory(aqi) {
+                                                        if (aqi <= 50) return 'Good';
+                                                                            if (aqi <= 100) return 'Moderate';
+                                                                                                if (aqi <= 200) return 'Unhealthy for Sensitive Groups';
+                                                                                                                    if (aqi <= 300) return 'Unhealthy';
+                                                                                                                                        if (aqi <= 400) return 'Very Unhealthy';
+                                                                                                                                                            return 'Hazardous';
+                                                    }
+                                }
+
+                    // Intersection Observer for scroll animations
+                    const observerOptions = {
+                                    threshold: 0.1,
+                                    rootMargin: '0px 0px -50px 0px'
+                                                };
+
+                    const observer = new IntersectionObserver((entries) => {
+                                    entries.forEach(entry => {
+                                                        if (entry.isIntersecting) {
+                                                                                entry.target.style.opacity = '1';
+                                                                                entry.target.style.transform = 'translateY(0)';
+                                                                            }
+                                                                        });
+                                }, observerOptions);
+
+                    // Parallax scrolling effect
+                    window.addEventListener('scroll', () => {
+                                    const scrolled = window.pageYOffset;
+                                    const parallaxElements = document.querySelectorAll('.feature-card, .glass');
+                                    parallaxElements.forEach((element, index) => {
+                                                        const speed = 0.5 + (index * 0.1);
+                                                        element.style.transform = `translateY(${scrolled * speed * 0.01}px)`;
+                                                    });
+                                });
+
+                    // Interactive button animations
+                    const ctaButtons = document.querySelectorAll('.cta-button');
+                    ctaButtons.forEach(button => {
+                                    button.addEventListener('mouseenter', function() {
+                                                        this.style.transform = 'scale(1.05) translateY(-2px)';
+                                                        this.style.boxShadow = '0 15px 40px rgba(135, 222, 173, 0.4)';
+                                                    });
+                                    button.addEventListener('mouseleave', function() {
+                                                        this.style.transform = 'scale(1) translateY(0)';
+                                                        this.style.boxShadow = '0 10px 30px rgba(135, 222, 173, 0.3)';
+                                                    });
+                                });
+
+                    // Initialize AQI Monitor
+                    document.addEventListener('DOMContentLoaded', () => {
+                                    const aqiMonitor = new AQIMonitor();
+                                    console.log('AirPure Delhi - System Initialized');
+                                });
+                </script>
+
+        <!--
+        BACKEND INTEGRATION RECOMMENDATIONS:
+
+        1. JAVA Backend (Spring Boot):
+           - RESTful API for real-time AQI data from government APIs
+           - User authentication and order management system
+           - Database integration (MySQL/PostgreSQL) for customer data
+           - Payment gateway integration for e-commerce
+           Example endpoint: GET /api/aqi/delhi
+
+        2. PYTHON (Flask/Django):
+           - Machine Learning models for AQI prediction
+           - Data analytics for air quality trends
+           - Automated email notifications for high AQI days
+           - IoT integration with smart air purifiers
+
+        3. PHP (Laravel):
+           - Content Management System for blog and updates
+           - Customer support ticket system
+           - Admin dashboard for order tracking
+           - Invoice generation system
+
+        4. NODE.JS (Express):
+           - Real-time WebSocket connections for live AQI updates
+           - Lightweight microservices architecture
+           - API gateway for mobile apps
+           - Chat support with Socket.io
+
+        5. C# (.NET Core):
+           - Enterprise-grade backend system
+           - Windows desktop application for monitoring
+           - Azure cloud integration
+
+        6. RUBY (Ruby on Rails):
+           - Rapid prototyping and MVP development
+           - E-commerce platform with Stripe integration
+
+        7. GO (Golang):
+           - High-performance API services
+           - Concurrent data processing for IoT devices
+           - Microservices for scalability
+
+        8. RUST:
+           - Embedded systems for air purifier firmware
+           - Memory-safe IoT device programming
+
+        DATABASE OPTIONS:
+        - SQL: MySQL, PostgreSQL, MS SQL Server
+        - NoSQL: MongoDB (for sensor data), Redis (caching), Firebase
+        - Time-series: InfluxDB (for AQI historical data)
+
+        MOBILE APP DEVELOPMENT:
+        - React Native (JavaScript) - Cross-platform iOS/Android
+        - Flutter (Dart) - High-performance native apps
+        - Swift (iOS native) - Premium iOS experience
+        - Kotlin (Android native) - Modern Android development
+
+        CLOUD & DEVOPS:
+        - AWS (Lambda, EC2, S3) / Azure / Google Cloud Platform
+        - Docker containers for deployment
+        - Kubernetes for orchestration
+        - CI/CD pipelines (GitHub Actions, Jenkins)
+
+        DATA SCIENCE & AI:
+        - TensorFlow/PyTorch for predictive models
+        - Scikit-learn for ML algorithms
+        - Pandas/NumPy for data analysis
+
+        FRONTEND FRAMEWORKS (Alternative to vanilla JS):
+        - React.js with TypeScript
+        - Vue.js for progressive enhancement
+        - Angular for enterprise applications
+        - Svelte for lightweight reactivity
+
+        RECOMMENDED TECH STACK FOR AIRPURE DELHI:
+        Frontend: React.js + TypeScript
+        Backend: Java Spring Boot (scalable, enterprise-ready)
+        Database: PostgreSQL + Redis
+        Mobile: Flutter (single codebase for iOS/Android)
+        ML/AI: Python with TensorFlow
+        Cloud: AWS or Google Cloud
+        IoT: Rust for firmware + MQTT protocol
+        -->
+    
 </html>
